@@ -12,7 +12,6 @@ import math
 from pylab import *
 
 # documentation
-# import sys
 from api_docs import command, parse_args, help
 
 

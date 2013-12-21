@@ -19,6 +19,7 @@ Usage:
 from functools import wraps
 import sys
 import inspect
+import __main__
 
 def command(func, _funcs={}):
     """Decorate functions with this to register them as commands"""
@@ -82,10 +83,11 @@ def _format_doc(doc):
 def help():
     """Get usage information about this script"""
     print('Usage: {} [command]'.format(sys.argv[0]))
+
     # print module help here
-    # print(inspect.getdoc())
-    # if __doc__ is not None:
-    #     print('  • {}'.format(__doc__.strip()))
+    if __main__.__doc__ is not None:
+        print(__main__.__doc__.strip())
+
     print('')
     print('Available commands:')
     for name, func in sorted(command.__defaults__[0].items()):  # _funcs={}
