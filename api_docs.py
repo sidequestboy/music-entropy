@@ -50,7 +50,11 @@ def parse_args():
         cmd, args = 'help', []
 
     # do it!
-    funcs[cmd](*args)
+    output = funcs[cmd](*args)
+
+    # (and print the output)
+    if output:
+        print(output)
 
 def _signature(name, func):
     """Return string repr of function signature"""
