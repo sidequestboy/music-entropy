@@ -10,13 +10,14 @@ import struct
 from numpy.fft import fft, fftfreq
 import math
 from pylab import *
+from pylab import plot as pyplot
 
 # documentation
 from api_docs import command, parse_args, help
 
 
 @command
-def get_shannon_rel_entropy(file_name, down_sample=1, blah=2, foo='bar'):
+def get_shannon_rel_entropy(file_name, down_sample=1):
     """Get ratio of the song's entropy to the entropy of the Uniform
     distribution
     """
@@ -28,7 +29,7 @@ def get_shannon_rel_entropy(file_name, down_sample=1, blah=2, foo='bar'):
 
     song_fft = fft(song)
 
-    print(_shannon_rel_entropy(song_fft))
+    return _shannon_rel_entropy(song_fft)
 
 @command
 def plot(domain, file_name, down_sample=1):
@@ -57,15 +58,14 @@ def _plot_time(file_name, down_sample=1):
     num_frames = wr.getnframes()
     frame_rate = wr.getframerate()
 
-    t = arange(0.0, num_frames / frame_rate, down_sample / frame_rate)
+    t = arange(0.0, (num_frames - down_sample) / frame_rate, down_sample / frame_rate)
     
-    plot(t, song)
+    pyplot(t, song)
 
     xlabel('time (s)')
     ylabel('amplitude (maximum 2^8, minimum -2^8)')
     title('Amplitude of track {} over time'.format(file_name))
     grid(True)
-    # savefig("{}.png".format(file_name[:-4]))
     show()
 
 def _plot_frequencies(file_name, down_sample=1):
@@ -100,12 +100,13 @@ def get_wav_info(file_name):
     frame_rate = wr.getframerate()
     num_frames = wr.getnframes()
     n_channels = wr.getnchannels()
-    print("sample width: {} bytes".format(sample_width))
-    print("frame rate: {} Hz".format(frame_rate))
-    print("num frames: {}".format(num_frames))
-    print("track length: {} s".format(num_frames / frame_rate))
-    print("num channels: {}".format(n_channels))
+    s = "sample width: {} bytes\n".format(sample_width) + \
+        "frame rate: {} Hz\n".format(frame_rate) + \
+        "num frames: {}\n".format(num_frames) + \
+        "track length: {} s\n".format(num_frames / frame_rate) + \
+        "num channels: {}\n".format(n_channels)
 
+    return s
 
 def _time_data(wr, down_sample=1, max_frames=None):
     # expects wav file object opened for reading
