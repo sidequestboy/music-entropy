@@ -15,7 +15,7 @@ For usage information type:
 Examples:
 ---------
 Plots
-^^^^^
++++++
 ```
 ./music.py plot time '~/01 Roar.wav'
 ./music.py plot freq '~/01 Roar.wav'
@@ -23,7 +23,7 @@ Plots
 ```
 
 Shannon's Relative Entropy:
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
++++++++++++++++++++++++++++
 ```
 ./music.py get_shannon_rel_entropy '~/02 - De Praestigiis Daemonum.wav'
 ```
