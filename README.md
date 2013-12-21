@@ -5,14 +5,14 @@ Finds Shannon's relative entropy of .wav files
 
 For now, only handles stereo, 16-bit sample width .wav files.
 
-Usage:
+Usage
 ------
 For usage information type:
 ```
 ./music.py help
 ```
 
-Examples:
+Examples
 ---------
 ### Plots
 ```
@@ -21,7 +21,7 @@ Examples:
 
 ```
 
-### Shannon's Relative Entropy:
+### Shannon's Relative Entropy
 ```
 ./music.py get_shannon_rel_entropy '~/02 - De Praestigiis Daemonum.wav'
 ```
