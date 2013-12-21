@@ -1,4 +1,4 @@
 music-entropy
 =============
 
-Finds Shannon's relative entropy, mutual information of .wav files
+Finds Shannon's relative entropy of .wav files
