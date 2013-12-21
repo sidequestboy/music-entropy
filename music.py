@@ -6,11 +6,9 @@
 import wave
 import struct
 
-# math & plotting
+# math
 from numpy.fft import fft, fftfreq
 import math
-from pylab import *
-from pylab import plot as pyplot
 
 # documentation
 from api_docs import command, parse_args, help
@@ -40,13 +38,16 @@ def plot(domain, file_name, down_sample=1):
         the Fast Fourier Transform of the .wav data.
 
     """
+
     if "time" in domain:
         _plot_time(file_name, down_sample=down_sample)
     if "freq" in domain:
-        _plot_freq(file_name, down_sample=down_sample)
+        _plot_frequencies(file_name, down_sample=down_sample)
 
  
 def _plot_time(file_name, down_sample=1):
+    from pylab import plot as pyplot
+    from pylab import arange, xlabel, ylabel, title, grid, show
 
     try:
         down_sample = int(down_sample)
@@ -69,6 +70,8 @@ def _plot_time(file_name, down_sample=1):
     show()
 
 def _plot_frequencies(file_name, down_sample=1):
+    from pylab import bar, xlabel, ylabel, title, grid, show
+
     try:
         down_sample = int(down_sample)
     except TypeError:
@@ -80,8 +83,11 @@ def _plot_frequencies(file_name, down_sample=1):
     frequencies = fftfreq(len(song), 1 / wr.getframerate())
     
     bar(frequencies, [abs(z) for z in fft(song)])
-    title('Amplitudes of frequencies of track {}'.format(file_name))
 
+    xlabel('frequency (Hz)')
+    ylabel('amplitude (complex modulus)')
+    title('Amplitudes of frequencies of track {}'.format(file_name))
+    grid(True)
     show()
 
 @command
