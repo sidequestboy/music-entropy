@@ -10,7 +10,7 @@ Usage:
 
     def my_func(arg_1, arg_2):
         \"\"\"does something cool\"\"\"
-        print(int(arg_1) ^ int(arg_2))
+        return int(arg_1) ^ int(arg_2)
 
     if __name__ == '__main__':
         parse_args()
